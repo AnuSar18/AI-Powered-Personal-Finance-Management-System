@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <header>
+            <div class="logo">Hisaab.com</div>
+            <nav>
+                <ul>
+                    <li>Cash Flow</li>
+                    <li>Expenses</li>
+                    <li>Assets</li>
+                    <li>Liabilities</li>
+                    <li>Income</li>
+                    <li>Ledger</li>
+                    <li>More</li>
+                </ul>
+            </nav>
+            <div class="mode-toggle">
+                <span class="readonly">readonly</span>
+                <button id="toggle-dark-mode">🌙</button>
+            </div>
+        </header>
+        <main>
+            <section class="dashboard">
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>Net Worth</h3>
+                        <p>1,61,73,795</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Net Investment</h3>
+                        <p>1,17,92,400</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Gain / Loss</h3>
+                        <p>43,81,395</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>XIRR</h3>
+                        <p>7.10</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Checking Balance</h3>
+                        <div class="balance-details">
+                            <span class="bank">SBI</span>
+                            <span class="amount">1,636</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="expenses">
+                    <h3>Expenses</h3>
+                    <p>Hurray! You have no expenses this month.</p>
+                </div>
+                <div class="recurring">
+                    <h3>Recurring</h3>
+                    <div class="recurring-items">
+                        <div class="recurring-item">
+                            <h4>EPF</h4>
+                            <p>33.75T due 3 days ago</p>
+                        </div>
+                        <div class="recurring-item">
+                            <h4>Internet</h4>
+                            <p>1.5T due 3 days ago</p>
+                        </div>
+                        <div class="recurring-item">
+                            <h4>Rent</h4>
+                            <p>20T due 3 days ago</p>
+                        </div>
+                        <div class="recurring-item">
+                            <h4>EMI Principle</h4>
+                            <p>29.99T due 26 days ago</p>
+                        </div>
+                        <div class="recurring-item">
+                            <h4>EMI Interest</h4>
+                            <p>8.88 due 27 days ago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transactions">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-item">
+                        <p>Pay Credit Card Bill</p>
+                        <div class="transaction-details">
+                            <span>CreditCard:Freedom</span>
+                            <span>Checking:SBI</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <p>Groceries</p>
+                        <div class="transaction-details">
+                            <span>Food</span>
+                            <span>CreditCard:Freedom</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cash-flow">
+                    <h3>Cash Flow</h3>
+                    <canvas id="cashFlowChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
