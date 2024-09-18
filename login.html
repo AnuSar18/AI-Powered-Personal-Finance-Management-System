@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hisaab.com - Login</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            background-image: url('https://img.freepik.com/premium-photo/business-concept-calculator-money-banner-with-copy-space-photo_526934-4288.jpg?w=1380'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Hover effects on inputs */
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 2px solid #007BFF;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Floating Label Effect */
+        input[type="text"]:placeholder-shown + label,
+        input[type="password"]:placeholder-shown + label {
+            position: absolute;
+            top: 14px;
+            left: 10px;
+            color: #aaa;
+            transition: 0.3s ease;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus + label,
+        input[type="password"]:focus + label {
+            top: -10px;
+            left: 8px;
+            color: #007BFF;
+            font-size: 12px;
+        }
+
+        /* Link to registration */
+        .register-link {
+            margin-top: 20px;
+            display: block;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login to Hisaab</h1>
+        <form action="login.html" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+
+        <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
+        <a href="register.html" class="register-link">Not registered yet? Register here</a>
+    </div>
+</body>
+</html>
