@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hisaab.com - Registration</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh; /* Full viewport height */
+            background-image: url('https://img.freepik.com/premium-photo/business-concept-calculator-money-banner-with-copy-space-photo_526934-4288.jpg?w=1380');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            width: 90%;
+            max-width: 500px;
+            height: 94vh; /* Fixed height */
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            overflow: hidden; /* No overflow */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out form and buttons */
+        }
+
+        h1 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1; /* Allow form to grow and fill space */
+            overflow: hidden; /* No overflow inside form */
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 4px;
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+        }
+
+        label {
+            margin-bottom: 2px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 7px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            background-color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 4px;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            padding: 5.5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .note {
+            font-size: 10px;
+            color: #888;
+            margin-top: -4px;
+        }
+
+        .login-button {
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 2.5px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 8px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .login-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                padding: 8px;
+                max-width: 95%;
+                height: 90vh; /* Adjust for mobile */
+            }
+
+            h1 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Your Hisaab Account</h1>
+        <form action=" http://localhost:3000/register" method="post">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="salary">Monthly Salary (₹):</label>
+                <input type="number" id="salary" name="salary" placeholder="Enter your monthly salary" required>
+            </div>
+
+            <div class="form-group">
+                <label for="short_term_goal">Short Term Goal:</label>
+                <input type="text" id="short_term_goal" name="short_term_goal" placeholder="Your short-term goal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="years_to_reach_short_term_goal">Years to Reach Short Term Goal:</label>
+                <input type="text" id="years_to_reach_short_term_goal" name="years_to_reach_short_term_goal" placeholder="Years to reach short term goal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="long_term_goal">Long Term Goal:</label>
+                <input type="text" id="long_term_goal" name="long_term_goal" placeholder="Your long-term goal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="years_to_reach_long_term_goal">Years to Reach Long Term Goal:</label>
+                <input type="text" id="years_to_reach_long_term_goal" name="years_to_reach_long_term_goal" placeholder="Years to reach long term goal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loan_taken">Any Loan Taken? (Yes/No)</label>
+                <input type="text" id="loan_taken" name="loan_taken" placeholder="Yes or No" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount (₹):</label>
+                <input type="number" id="loan_amount" name="loan_amount" placeholder="Enter loan amount (if applicable)">
+                <span class="note">(Leave blank if no loan)</span>
+            </div>
+
+            <div class="form-group">
+                <label for="savings_goal">Monthly Savings Goal (₹):</label>
+                <input type="number" id="savings_goal" name="savings_goal" placeholder="How much to save monthly" required>
+            </div>
+
+            <div class="form-group">
+                <label for="goal_years">Years to Reach Your Goal:</label>
+                <input type="number" id="goal_years" name="goal_years" placeholder="Number of years for the goal" required>
+            </div>
+
+            <input type="submit" value="Register">
+        </form>
+
+        <!-- Added Login Button -->
+        <a href="login.html" class="login-button">Login</a>
+    </div>
+</body>
+</html>
