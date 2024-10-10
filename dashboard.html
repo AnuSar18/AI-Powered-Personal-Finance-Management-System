@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hisaab Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        #dashboard {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            background-color: #E0F7FA; /* Light blue background */
+            padding: 45px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .info-box {
+            display: inline-block;
+            width: 22%;
+            margin: 10px 1%;
+            padding: 25px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        .salary { background-color: #4CAF50; }
+        .loan { background-color: #FF9800; }
+        .long-term { background-color: #2196F3; }
+        .short-term { background-color: #9C27B0; }
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        #expense-section {
+            margin-top: 20px;
+        }
+        #summary {
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 45px;
+            width: calc(100% - 22px);
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .ai-report-button {
+            padding: 10px 15px;
+            background-color: #2196F3; /* Blue color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .ai-report-button:hover {
+            background-color: #1976D2; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <h1 id="welcome-message"></h1>
+        <div class="info-container">
+            <div class="info-box salary">Salary: <span id="salary"></span></div>
+            <div class="info-box loan">Loan Amount: <span id="loan-amount"></span></div>
+            <div class="info-box long-term">Long Term Goal: <span id="long-term-goal"></span> (Years: <span id="long-term-years"></span>)</div>
+            <div class="info-box short-term">Short Term Goal: <span id="short-term-goal"></span> (Years: <span id="short-term-years"></span>)</div>
+        </div>
+        
+        <div id="expense-section">
+            <input type="text" id="expense-input" placeholder="Enter Expense (e.g., 100 or Rent 200)">
+            <button onclick="addExpense()">Add Expense</button>
+        </div>
+        
+        <div id="summary">
+            <h2>Savings: <span id="savings"></span></h2>
+            <h2>Monthly Savings for Long Term Goal: <span id="long-term-allocation"></span></h2>
+            <h2>Monthly Savings for Short Term Goal: <span id="short-term-allocation"></span></h2>
+            <button class="ai-report-button" onclick="generateAIReport()">Generate AI Report</button>
+        </div>
+    </div>
+
+    <script>
+        let userData;
+
+        async function fetchUserData(userId) {
+            const response = await fetch(`http://localhost:5000/api/user/${userId}`);
+            userData = await response.json();
+            displayUserData();
+        }
+
+        function displayUserData() {
+            document.getElementById('welcome-message').innerText = `Welcome, ${userData.name}`;
+            document.getElementById('salary').innerText = userData.salary;
+            document.getElementById('loan-amount').innerText = userData.loanAmount;
+            document.getElementById('long-term-goal').innerText = userData.longTermGoal.amount;
+            document.getElementById('long-term-years').innerText = userData.longTermGoal.years;
+            document.getElementById('short-term-goal').innerText = userData.shortTermGoal.amount;
+            document.getElementById('short-term-years').innerText = userData.shortTermGoal.years;
+            calculateSavings();
+        }
+
+        async function addExpense() {
+            const expenseInput = document.getElementById('expense-input').value;
+            if (expenseInput) {
+                await fetch(`http://localhost:5000/api/user/${userData._id}/expense`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ expense: expenseInput }),
+                });
+                userData.expenses.push(expenseInput);
+                document.getElementById('expense-input').value = '';
+                calculateSavings();
+            }
+        }
+
+        function calculateSavings() {
+            const totalExpenses = userData.expenses.reduce((acc, curr) => {
+                const parts = curr.match(/(\D+)(\d+)/);
+                return acc + (parts ? parseFloat(parts[2]) : 0);
+            }, 0);
+            const savings = userData.salary - totalExpenses - userData.loanAmount;
+            document.getElementById('savings').innerText = savings.toFixed(2);
+            
+            const longTermMonths = userData.longTermGoal.years * 12;
+            const longTermAllocation = savings > 0 ? Math.max(userData.longTermGoal.amount / longTermMonths, 0) : 0;
+            document.getElementById('long-term-allocation').innerText = longTermAllocation.toFixed(2);
+
+            const shortTermMonths = userData.shortTermGoal.years * 12;
+            const shortTermAllocation = savings > 0 ? Math.max(userData.shortTermGoal.amount / shortTermMonths, 0) : 0;
+            document.getElementById('short-term-allocation').innerText = shortTermAllocation.toFixed(2);
+        }
+
+        function generateAIReport() {
+            // Logic for generating the AI report goes here
+            alert("Generating AI Report...");
+        }
+
+        // Replace 'userId' with an actual user ID from your database
+        fetchUserData('userId'); // Example: '60d5ec49f98e3e0015e0c9a0'
+    </script>
+</body>
+</html>
