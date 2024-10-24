@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Chatbot</title>
+    <style>
+        /* Set background image and cover the entire page */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/premium-photo/gold-coins-raining-table-black-background-generative-ai_939992-1601.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Title style */
+        h1 {
+            font-size: 3em;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Chatbox container styling */
+        #chatbox {
+            width: 400px;
+            height: 500px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header of the chatbox */
+        #chatbox-header {
+            background-color: #007bff; /* Blue header */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Content area of the chatbox */
+        #chatbox-content {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        /* Footer input and button area */
+        #chatbox-footer {
+            display: flex;
+            padding: 10px;
+            background-color: #eee;
+        }
+
+        /* Chat message input styling */
+        #message {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Send button styling */
+        #send-btn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Scrollable chat messages */
+        #chatbox-content div {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Title of the chatbot page -->
+    <h1>Finance Chatbot</h1>
+
+    <!-- Chatbox -->
+    <div id="chatbox">
+        <div id="chatbox-header">Finance Chatbot</div>
+        <div id="chatbox-content"></div>
+        <div id="chatbox-footer">
+            <input type="text" id="message" placeholder="Type a message..." required>
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot functionality using JavaScript -->
+    <script>
+        const chatContent = document.getElementById('chatbox-content');
+        const messageInput = document.getElementById('message');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Predefined responses based on specific user questions
+// Updated predefined responses based on keywords
+const responses = {
+    balance: "You can access your balance on the dashboard.",
+    savings: "Our system helps you track and manage your savings goals efficiently. Would you like guidance on how to set or achieve your savings goals? If so, check out our AI report generator.",
+    loan: "Our system can help you manage loan management, loan advices, etc.",
+    transactions: "You can review recent transactions and get a detailed breakdown of expenses in your transaction history section.",
+    budget: "We offer tools to create and manage monthly budgets tailored to your financial goals. Would you like assistance in setting up or adjusting your budget? Use AI report generator.",
+    investment: "We provide insights and recommendations on various investment options to suit your financial profile. For insights, check out our AI report generator.",
+    expenses: "You can easily track and categorize your expenses to stay on top of your spending. For any further queries, contact 9876543210.",
+    advice: "Our system offers personalized financial advice to help you meet your financial goals. Use our AI report generator for the same.",
+    support: "Our customer support team is available to assist you with any issues related to your account or our services. Would you like to connect with a support representative? Contact 9876543210.",
+    report: "We provide AI report to generate a monthly record and advices based on the same.",
+};
+
+// Function to display messages in the chatbox
+function displayMessage(sender, message) {
+    chatContent.innerHTML += `<div><strong>${sender}:</strong> ${message}</div>`;
+    chatContent.scrollTop = chatContent.scrollHeight; // Scroll to the bottom
+}
+
+// Send message and display the chatbot's response
+sendBtn.addEventListener('click', () => {
+    const userMessage = messageInput.value.toLowerCase();
+    if (userMessage.trim() === '') return;
+
+    // Display the user's message in the chatbox
+    displayMessage('You', messageInput.value);
+    messageInput.value = ''; // Clear input field
+
+    // Check for keywords in the user's message
+    setTimeout(() => {
+        let botResponse = "I'm sorry, I don't understand that question.";
+
+        // Iterate through the predefined responses and find a matching keyword
+        for (let keyword in responses) {
+            if (userMessage.includes(keyword)) {
+                botResponse = responses[keyword];
+                break;
+            }
+        }
+
+        // Display the chatbot's response
+        displayMessage('Bot', botResponse);
+    }, 1000);
+});
+
+// Allow the user to press Enter to send a message
+messageInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        sendBtn.click();
+    }
+});
+    </script>
+</body>
+</html>
