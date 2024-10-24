@@ -79,6 +79,24 @@
         .ai-report-button:hover {
             background-color: #1976D2; /* Darker blue on hover */
         }
+        /* Chatbot Button styling */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .chatbot-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +121,9 @@
             <button class="ai-report-button" onclick="generateAIReport()">Generate AI Report</button>
         </div>
     </div>
+
+    <!-- Chatbot Button -->
+    <button class="chatbot-button" onclick="window.location.href='chatbot.html'">💬</button>
 
     <script>
         let userData;
